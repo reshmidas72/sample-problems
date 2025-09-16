@@ -1,0 +1,72 @@
+# To-Do List App in Python
+# Save this file as todo.py
+
+tasks = []
+
+def show_menu():
+    print("\n=== TO-DO LIST APP ===")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Mark Task as Done")
+    print("4. Delete Task")
+    print("5. Exit")
+
+def add_task():
+    task = input("Enter task: ")
+    tasks.append({"task": task, "done": False})
+    print("✅ Task added!")
+
+def view_tasks():
+    if not tasks:
+        print("📭 No tasks yet!")
+    else:
+        print("\nYour Tasks:")
+        for i, t in enumerate(tasks, start=1):
+            status = "✔️" if t["done"] else "❌"
+            print(f"{i}. {t['task']} [{status}]")
+
+def mark_done():
+    view_tasks()
+    try:
+        task_num = int(input("Enter task number to mark as done: ")) - 1
+        if 0 <= task_num < len(tasks):
+            tasks[task_num]["done"] = True
+            print("🎉 Task marked as done!")
+        else:
+            print("⚠️ Invalid task number")
+    except ValueError:
+        print("⚠️ Please enter a number")
+
+def delete_task():
+    view_tasks()
+    try:
+        task_num = int(input("Enter task number to delete: ")) - 1
+        if 0 <= task_num < len(tasks):
+            removed = tasks.pop(task_num)
+            print(f"🗑️ Task '{removed['task']}' deleted!")
+        else:
+            print("⚠️ Invalid task number")
+    except ValueError:
+        print("⚠️ Please enter a number")
+
+def main():
+    while True:
+        show_menu()
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            add_task()
+        elif choice == "2":
+            view_tasks()
+        elif choice == "3":
+            mark_done()
+        elif choice == "4":
+            delete_task()
+        elif choice == "5":
+            print("👋 Goodbye! Have a productive day!")
+            break
+        else:
+            print("⚠️ Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
