@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Guessing Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+    .game-box {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+      max-width: 350px;
+    }
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+      width: 70%;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ff9800;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #e68900;
+    }
+    #message {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-box">
+    <h2>🎮 Number Guessing Game</h2>
+    <p>I have picked a number between <b>1 and 100</b>. Can you guess it?</p>
+    <input type="number" id="guessInput" placeholder="Enter your guess">
+    <br>
+    <button onclick="checkGuess()">Guess</button>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById("guessInput").value);
+      const message = document.getElementById("message");
+      attempts++;
+
+      if (isNaN(guess)) {
+        message.textContent = "⚠️ Please enter a valid number!";
+        return;
+      }
+
+      if (guess < randomNumber) {
+        message.textContent = "Too low! Try again.";
+      } else if (guess > randomNumber) {
+        message.textContent = "Too high! Try again.";
+      } else {
+        message.textContent = `🎉 Correct! You guessed it in ${attempts} attempts.`;
+      }
+    }
+  </script>
+</body>
+</html>
